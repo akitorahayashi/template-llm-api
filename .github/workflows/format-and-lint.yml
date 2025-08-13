@@ -14,17 +14,13 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: '3.12'
-        cache: 'poetry'
 
-    # pipxの代わりにpipでpoetryをインストール
-    - name: Install poetry
-      run: pip install poetry
-
+    # requirements.txtを使って依存関係をインストール
     - name: Install dependencies
-      run: poetry install
+      run: pip install -r requirements.txt
 
     - name: Run linter (Ruff)
-      run: poetry run ruff check .
+      run: ruff check .
 
     - name: Check formatting (Black)
-      run: poetry run black --check .
+      run: black --check .
