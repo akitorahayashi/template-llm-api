@@ -22,6 +22,10 @@ jobs:
     - name: Install poetry using pipx
       run: pipx install poetry
 
+    # pipxのパスをGITHUB_PATHに追加
+    - name: Add pipx to PATH
+      run: pipx ensurepath >> $GITHUB_PATH
+
     - name: Install dependencies
       run: poetry install
 
