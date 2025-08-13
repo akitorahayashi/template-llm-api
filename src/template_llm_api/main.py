@@ -59,7 +59,12 @@ async def generate(request: GenerateRequest) -> dict:
         logger.error("Ollama APIへの接続に失敗しました: %s", e)
         raise HTTPException(status_code=502, detail="Failed to connect to upstream API.") from e
 
-    ollama_response = response.json()
+    try:
+        ollama_response = response.json()
+    except ValueError as e:
+        logger.error("Ollama APIからのレスポンスJSONのパースに失敗しました: %s", e)
+        raise HTTPException(status_code=502, detail="Upstream API returned invalid JSON.") from e
+
     text = ollama_response.get("response")
 
     if not isinstance(text, str):
