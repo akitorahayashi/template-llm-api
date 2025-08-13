@@ -1,10 +1,8 @@
 from fastapi import FastAPI
 from typing import Optional
 
-# FastAPIのインスタンスを作成
 app = FastAPI()
 
-# ルートエンドポイント（/）に対するGETリクエストのハンドラ
 @app.get("/")
 def read_root():
     return {"message": "Hello, World!"}
