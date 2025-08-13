@@ -7,14 +7,12 @@ from dotenv import load_dotenv
 # .envファイルから環境変数を読み込む
 load_dotenv()
 
-# FastAPIのインスタンスを作成
 app = FastAPI()
 
 # リクエストボディの型を定義
 class GenerateRequest(BaseModel):
     prompt: str
-
-# ルートエンドポイント（/）に対するGETリクエストのハンドラ
+      
 @app.get("/")
 def read_root():
     return {"message": "Hello, World!"}
