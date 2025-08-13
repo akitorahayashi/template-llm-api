@@ -16,15 +16,9 @@ jobs:
         python-version: '3.12'
         cache: 'poetry'
 
-    - name: Install pipx
-      run: pip install pipx
-
-    - name: Install poetry using pipx
-      run: pipx install poetry
-
-    # pipxのパスをGITHUB_PATHに追加
-    - name: Add pipx to PATH
-      run: pipx ensurepath >> $GITHUB_PATH
+    # pipxの代わりにpipでpoetryをインストール
+    - name: Install poetry
+      run: pip install poetry
 
     - name: Install dependencies
       run: poetry install
