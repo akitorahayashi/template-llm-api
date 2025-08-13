@@ -47,6 +47,8 @@ async def generate(request: GenerateRequest) -> dict:
 
     try:
         async with httpx.AsyncClient() as client:
+            if OLLAMA_API_URL is None:
+                raise HTTPException(status_code=500, detail="OLLAMA_API_URL is not set.")
             response = await client.post(OLLAMA_API_URL, json=payload, timeout=60.0)
             response.raise_for_status()  # 2xx以外のステータスコードで例外を発生
     except httpx.TimeoutException as e:
